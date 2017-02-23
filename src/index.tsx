@@ -1,10 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Content from './containers/content';
+import ToolMenuList from './components/toolbox/ToolMenuList.ui';
+import ToolMenuItemStore from './components/toolbox/ToolMenu.store';
 
 ReactDOM.render(
 	<span>
-		<Content />
+		<h1>React app</h1>
+		<ToolMenuList />
 	</span>,
 	document.getElementById('example')
 );
