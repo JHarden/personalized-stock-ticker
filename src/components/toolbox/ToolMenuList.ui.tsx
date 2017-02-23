@@ -12,9 +12,7 @@ class ToolMenuList extends React.Component<IToolMenuList, {}> {
 
 	private toolMenuItems = () => {
 
-		console.log('rendering toolMenuItems');
 		let menuItems = ToolMenuStore.menuItems;
-		console.log(menuItems);
 		return  ToolMenuStore.menuItems.map((item: ToolMenuItemModel, index) => {
 			return	<ToolMenuItem model={item} key={index}/>;
 		});
@@ -45,6 +43,7 @@ const toolMenuList = styled(ToolMenuList)`
 		display: flex;
 		flex-direction: column;
 		width: 75px;
+		margin: 0;
 	}
 `;
 

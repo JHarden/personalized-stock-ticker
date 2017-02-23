@@ -12,7 +12,6 @@ class ToolMenuStore {
 
 	private initMenuItems(): Array<ToolMenuItemModel> {
 
-		console.log('init menu items');
 		let menuItems: ToolMenuItemModel[] =
 			[new ToolMenuItemModel('Search'),
 			new ToolMenuItemModel('Tickers'),
