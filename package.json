@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "learning the trypescript react redux stack",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "start": "webpack-dev-server"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -35,6 +36,9 @@
     "@types/react": "^0.14.39",
     "@types/react-dom": "^0.14.17",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "styled-components": "^1.4.4",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.3"
   }
 }

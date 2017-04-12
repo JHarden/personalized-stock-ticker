@@ -8,9 +8,7 @@
 		"jsx": "react",
 		"experimentalDecorators": true
 	},
-	"files": [
-		"./src/components/toolbox/ToolMenuItem.ui.tsx",
-		"./src/components/toolbox/ToolMenu.store.ts",
-		"./src/index.tsx"
-	]
+  "paths": {
+            "*": ["./*", "../typings/*", "*"]
+        }
 }
