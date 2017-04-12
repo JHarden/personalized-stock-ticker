@@ -17,14 +17,20 @@ interface SearchProps {
 class Search extends React.Component<SearchProps, void> {
 
 	private onChange(input: React.FormEvent<HTMLInputElement>) {
-
 		this.props.model.setSearch(input.currentTarget.value);
+	}
+
+	private onClick() {
+		this.props.model.sendSearch();
 	}
 
 	render() {
 		const { model } = this.props;
 		return (
-			<StyledInput type='text' onChange={(value) => this.onChange(value)} />
+			<div>
+				<StyledInput type='text' onChange={(value) => this.onChange(value)} />
+				<button onClick={() => this.onClick()}>Search! </button>
+			</div>
 		);
 	}
 }
