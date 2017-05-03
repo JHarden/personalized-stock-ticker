@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import Navbar from '../navbar/nav.ui';
 import Workspace from '../workspace/workspace.ui';
-import BaseModel from '../BaseModel';
+import BaseModel from '../base.model';
 
 let baseModel = new BaseModel();
 

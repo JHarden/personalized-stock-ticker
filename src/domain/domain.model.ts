@@ -1,8 +1,6 @@
 
 import { action, observable } from 'mobx';
-
 import { Observable } from 'rxjs';
-
 import Quote from './qoute.model';
 
 const YQL_BASE = `https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol =`;
@@ -31,11 +29,11 @@ class DomainModel {
 	}
 
 	@action.bound setQuote(quote: Quote) {
-		if (this.quote) {
-			this.quoteHistory.push(this.quote);
-		}
+
+		if (this.isDuplicate(quote)) return;
 		this.quote = quote;
-		localStorage.setItem('stockQuote', JSON.stringify(this.quote));
+		this.quoteHistory.push(this.quote);
+		localStorage.setItem('stockQuoteHistory', JSON.stringify(this.quoteHistory));
 	}
 
 	@action.bound getQuoteHistory() {
@@ -50,6 +48,16 @@ class DomainModel {
 		localStorage.clear();
 		this.quoteHistory = [];
 	}
+
+	private isDuplicate(quote: Quote): boolean {
+		for (let q of this.quoteHistory) {
+			if (q.Name === quote.Name) {
+				return true;
+			};
+		}
+		return false;
+	}
+
 }
 
 export default DomainModel;

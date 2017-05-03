@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
 interface QuoteTileProps {
 	name: string;
@@ -7,18 +8,26 @@ interface QuoteTileProps {
 	bid: string;
 }
 
+const Tile = styled.div`
+
+	ul{
+		list-style: none;
+	}
+
+`;
+
 class QuoteTile extends React.Component<QuoteTileProps, void> {
 
 	render() {
 		return (
-			<div>
+			<Tile>
 				<ul>
 					<li>{this.props.name}</li>
 					<li>{this.props.symbol}</li>
 					<li>{this.props.ask}</li>
 					<li>{this.props.bid}</li>
 				</ul>
-			</div>
+			</Tile>
 		);
 	}
 }

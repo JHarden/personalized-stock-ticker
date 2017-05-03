@@ -3,7 +3,6 @@ import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
 import DomainModel from '../../domain/domain.model';
-import DeserializationHelper from '../../domain/deserializer/DeserializeHelper';
 import Quote from '../../domain/qoute.model';
 import QuoteTile from '../quote/quote.ui';
 import QuoteHistory from '../recent/QuoteHistory';
@@ -29,9 +28,13 @@ class Workspace extends React.Component<WorkspaceProps, void> {
 		this.setQuoteHistory();
 	}
 	public setQuoteHistory() {
-		let stringQuote: any = localStorage.getItem('stockQuote');
-		console.log('DOM', this.props.domain, this.props.domain.quoteHistory);
-		this.props.domain.quoteHistory.push(DeserializationHelper.toInstance(new Quote, stringQuote));
+		let quotes = JSON.parse(localStorage.getItem('stockQuoteHistory'));
+		if (quotes !== null) {
+			for (let item of quotes) {
+				let qt = item as Quote;
+				this.props.domain.pushQuoteHistory(qt);
+			}
+		}
 	}
 
 	public renderQuote() {
@@ -51,11 +54,11 @@ class Workspace extends React.Component<WorkspaceProps, void> {
 		const { domain } = this.props;
 		return (
 			<StyledWorkspace>
-				<h1>{domain.quote ? domain.quote.Name : ' :o'}</h1>
+				<h1>{domain.quote ? domain.quote.Name : ''}</h1>
 				<div>
 					{this.renderQuote()}
 				</div>
-				<QuoteHistory quotes={domain.quoteHistory}/>
+				<QuoteHistory quotes={domain.quoteHistory} />
 			</StyledWorkspace>
 		);
 	}

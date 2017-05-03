@@ -1,8 +1,9 @@
+import { observable, useStrict } from 'mobx';
 
 import SearchModel from './searchbar/search.model';
 import DomainModel from '../domain/domain.model';
 
-import { observable } from 'mobx';
+useStrict(true);
 
 class BaseModel {
 
