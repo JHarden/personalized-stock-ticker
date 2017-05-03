@@ -10,7 +10,7 @@ const YQL_POST = `&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org
 class DomainModel {
 
 	@observable quote: Quote;
-	@observable quoteHistory: Quote[];
+	@observable quoteHistory: Quote[] = [];
 
 	@action.bound sendTestPost(input: string) {
 
@@ -21,19 +21,21 @@ class DomainModel {
 			crossDomain: true,
 			withCredentials: false
 		})
-		.subscribe(
+			.subscribe(
 			(r: any) => {
 				let stockQoute = r.response.query.results.quote;
 				this.setQuote(stockQoute as Quote);
 			},
 			(err: any) => console.log('ajax err', err)
-		);
+			);
 	}
 
 	@action.bound setQuote(quote: Quote) {
+		if (this.quote) {
+			this.quoteHistory.push(this.quote);
+		}
 		this.quote = quote;
 		localStorage.setItem('stockQuote', JSON.stringify(this.quote));
-		console.log('Q', this.quote.Name);
 	}
 
 	@action.bound getQuoteHistory() {

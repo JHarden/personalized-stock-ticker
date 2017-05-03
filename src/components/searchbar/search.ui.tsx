@@ -20,7 +20,9 @@ class Search extends React.Component<SearchProps, void> {
 		this.props.model.setSearch(input.currentTarget.value);
 	}
 
-	private onClick() {
+	private onApply(key?: number) {
+		if (key !== 13)
+			return;
 		this.props.model.sendSearch();
 	}
 
@@ -28,8 +30,9 @@ class Search extends React.Component<SearchProps, void> {
 		const { model } = this.props;
 		return (
 			<div>
-				<StyledInput type='text' onChange={(value) => this.onChange(value)} />
-				<button onClick={() => this.onClick()}>Search! </button>
+				<StyledInput type='text' onChange={(value) => this.onChange(value)}
+					onKeyPress={(e) => this.onApply(e.charCode)} />
+				<button onClick={() => this.onApply()}>Search!</button>
 			</div>
 		);
 	}

@@ -13,7 +13,7 @@ class App extends React.Component<void, void>{
 		return (
 			<div>
 				<Navbar model={baseModel} />
-				<Workspace quote={baseModel.domainModel.quote} />
+				<Workspace domain={baseModel.domainModel} />
 			</div>
 		);
 	}

@@ -9,7 +9,6 @@ interface QuoteHistoryProps {
 class QuoteHistory extends React.Component<QuoteHistoryProps, void> {
 
 	private renderQuotes = () => {
-		console.log('QH', this.props.quotes);
 		return this.props.quotes.map((quote, index) => {
 			return <QuoteTile
 				ask={quote.Ask}
