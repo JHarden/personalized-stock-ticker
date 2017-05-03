@@ -16,7 +16,6 @@ interface NavbarProps {
 }
 
 const Navbar = (props: NavbarProps) => {
-
 	return(
 	<Nav>
 		<Search model={props.model.searchModel}/>
