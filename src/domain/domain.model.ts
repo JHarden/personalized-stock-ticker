@@ -45,6 +45,11 @@ class DomainModel {
 	@action.bound pushQuoteHistory(quote: Quote) {
 		this.quoteHistory.push(quote);
 	}
+
+	@action.bound clearQuoteHistory() {
+		localStorage.clear();
+		this.quoteHistory = [];
+	}
 }
 
 export default DomainModel;
