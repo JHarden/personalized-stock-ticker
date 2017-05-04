@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
-import Search from '../searchbar/search.ui';
+import Search from './search.ui';
 import ClearButton from '../navbar/clear.ui';
-import BaseModel from '../BaseModel';
+import BaseModel from '../base.model';
 
 const Nav = styled.div`
     background-color: #f1f0f0;

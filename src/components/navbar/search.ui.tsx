@@ -21,7 +21,7 @@ class Search extends React.Component<SearchProps, void> {
 	}
 
 	private onApply(key?: number) {
-		if (key !== 13)
+		if (key && key !== 13)
 			return;
 		this.props.model.sendSearch();
 	}
@@ -32,7 +32,7 @@ class Search extends React.Component<SearchProps, void> {
 			<div>
 				<StyledInput type='text' onChange={(value) => this.onChange(value)}
 					onKeyPress={(e) => this.onApply(e.charCode)} />
-				<button onClick={() => this.onApply()}>Search!</button>
+				<button onClick={(e) => this.onApply()}>Search!</button>
 			</div>
 		);
 	}

@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 import DomainModel from '../../domain/domain.model';
 import Quote from '../../domain/qoute.model';
-import QuoteTile from '../quote/quote.ui';
-import QuoteHistory from '../recent/QuoteHistory';
+import QuoteTile from './quote.tile.ui';
+import QuoteHistory from './quote.history.ui';
+import SideBar from './sidebar.ui';
 
 interface WorkspaceProps {
 	domain: DomainModel;
@@ -25,17 +26,9 @@ const StyledWorkspace = styled.div`
 class Workspace extends React.Component<WorkspaceProps, void> {
 
 	componentWillMount() {
-		this.setQuoteHistory();
+		this.props.domain.setQuoteHistory();
 	}
-	public setQuoteHistory() {
-		let quotes = JSON.parse(localStorage.getItem('stockQuoteHistory'));
-		if (quotes !== null) {
-			for (let item of quotes) {
-				let qt = item as Quote;
-				this.props.domain.pushQuoteHistory(qt);
-			}
-		}
-	}
+
 
 	public renderQuote() {
 		if (this.props.domain.quote) {
@@ -54,6 +47,7 @@ class Workspace extends React.Component<WorkspaceProps, void> {
 		const { domain } = this.props;
 		return (
 			<StyledWorkspace>
+				<SideBar />
 				<h1>{domain.quote ? domain.quote.Name : ''}</h1>
 				<div>
 					{this.renderQuote()}

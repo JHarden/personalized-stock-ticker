@@ -49,6 +49,16 @@ class DomainModel {
 		this.quoteHistory = [];
 	}
 
+	public setQuoteHistory() {
+		let quotes = JSON.parse(localStorage.getItem('stockQuoteHistory'));
+		if (quotes !== null) {
+			for (let item of quotes) {
+				let qt = item as Quote;
+				this.pushQuoteHistory(qt);
+			}
+		}
+	}
+
 	private isDuplicate(quote: Quote): boolean {
 		for (let q of this.quoteHistory) {
 			if (q.Name === quote.Name) {

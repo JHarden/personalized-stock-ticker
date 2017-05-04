@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Quote from '../../domain/qoute.model';
-import QuoteTile from '../quote/quote.ui';
+import QuoteTile from './quote.tile.ui';
 
 interface QuoteHistoryProps {
 	quotes: Quote[];
