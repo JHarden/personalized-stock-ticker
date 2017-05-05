@@ -56,14 +56,22 @@ const Tile = styled.div`
 	}
 `;
 
+
+
 class QuoteTile extends React.Component<QuoteTileProps, void> {
+
+	private renderChangeColor(value: string) {
+		let color = parseFloat(value) >= 0 ? 'green' : 'red';
+		return <span style={{color: color}}>{value}</span>;
+	}
 
 	render() {
 		return (
 			<Tile>
 				<Flex row spaceBetween>
 					<h4>{this.props.symbol} </h4>
-					<span>{this.props.change}</span>  <span>{this.props.changePercent}</span>
+					<span>{this.renderChangeColor(this.props.change)}</span>  
+					<span>{this.renderChangeColor(this.props.changePercent)}</span>
 				</Flex>
 				<label>{this.props.name}</label>
 				<Flex row>
