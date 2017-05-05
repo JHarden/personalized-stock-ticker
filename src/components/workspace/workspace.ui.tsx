@@ -22,9 +22,9 @@ const StyledWorkspace = styled.div`
 `;
 
 const MainQuotePanel = styled.div`
-	outline: 2px solid blue;
 	backgroound: #ebebeb;
 	width: 100%;
+	height: 100%;
 `;
 
 @observer

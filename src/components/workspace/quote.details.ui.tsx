@@ -13,11 +13,12 @@ interface QuoteDetailProps {
 }
 
 const Tile = styled.div`
-	height: 400px;
-	outline: 2px solid red;
+	height: 100%;
+	width: 100%;
 	background: lightgrey;
 	ul{
 		list-style: none;
+		margin: 0;
 	}
 `;
 

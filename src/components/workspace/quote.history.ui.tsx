@@ -9,14 +9,14 @@ interface QuoteHistoryProps {
 
 const QuoteHistoryList = styled.div`
 
-	outline: 2px solid green;
-	background: #ebebeb;
-
+	background-color: ${props => props.theme.backgroundPrimary};
+	width: 200px;
 	h3{
 		position: relative;
 		top: 0;
 		margin: 0;
 		text-align: center;
+		color: ${ props => props.theme.secondary};
 	}
 `;
 
@@ -30,6 +30,8 @@ class QuoteHistory extends React.Component<QuoteHistoryProps, void> {
 				name={quote.Name}
 				symbol={quote.Symbol}
 				key={index}
+				change={quote.Change}
+				changePercent={quote.ChangeinPercent}
 			/>;
 		});
 	}
