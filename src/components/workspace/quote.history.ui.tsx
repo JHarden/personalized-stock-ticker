@@ -10,7 +10,7 @@ interface QuoteHistoryProps {
 const QuoteHistoryList = styled.div`
 
 	background-color: ${props => props.theme.backgroundPrimary};
-	width: 200px;
+	min-width: 200px;
 	h3{
 		position: relative;
 		top: 0;

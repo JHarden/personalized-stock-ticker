@@ -28,8 +28,10 @@ injectGlobal`
 const theme = {
 	backgroundPrimary: '#272c33',
 	backgroundSecondary: '#3f4652',
-	primary: '#27d815',
-	secondary: '#ababd6'
+	secondary: '#ababd6',
+	negative: '#d84e4e',
+	positive: '#27d815',
+
 };
 
 @observer

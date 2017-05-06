@@ -40,7 +40,7 @@ const Tile = styled.div`
 		font-size: 16px;
 		font-weight: 400;
 		margin: 0;
-		color: ${props => props.theme.primary};
+		color: ${props => props.theme.positive};
 	}
 	label{
 		font-size: 12px;
@@ -61,7 +61,7 @@ const Tile = styled.div`
 class QuoteTile extends React.Component<QuoteTileProps, void> {
 
 	private renderChangeColor(value: string) {
-		let color = parseFloat(value) >= 0 ? 'green' : 'red';
+		let color = parseFloat(value) >= 0 ? '#27d815' : '#d84e4e';
 		return <span style={{color: color}}>{value}</span>;
 	}
 
