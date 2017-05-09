@@ -22,7 +22,7 @@ const StyledWorkspace = styled.div`
 `;
 
 const MainQuotePanel = styled.div`
-	backgroound: #ebebeb;
+	background: ${props => props.theme.backgroundPrimary};
 	width: 100%;
 	height: 100%;
 `;

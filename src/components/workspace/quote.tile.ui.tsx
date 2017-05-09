@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Flex from '../generic/flex.ui';
+import CrossButton from './ui/cross.button.ui';
 
 interface QuoteTileProps {
 	name: string;
@@ -21,6 +22,7 @@ const Tile = styled.div`
 	background-color: ${props => props.theme.backgroundSecondary};
 	color: #FFF;
 	padding: 10px;
+	position: relative;
 	ul{
 		list-style: none;
 		padding: 0;
@@ -62,7 +64,11 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 
 	private renderChangeColor(value: string) {
 		let color = parseFloat(value) >= 0 ? '#27d815' : '#d84e4e';
-		return <span style={{color: color}}>{value}</span>;
+		return <span style={{ color: color }}>{value}</span>;
+	}
+
+	private testClick() {
+		console.log('test click');
 	}
 
 	render() {
@@ -70,7 +76,7 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 			<Tile>
 				<Flex row spaceBetween>
 					<h4>{this.props.symbol} </h4>
-					<span>{this.renderChangeColor(this.props.change)}</span>  
+					<span>{this.renderChangeColor(this.props.change)}</span>
 					<span>{this.renderChangeColor(this.props.changePercent)}</span>
 				</Flex>
 				<label>{this.props.name}</label>
@@ -80,6 +86,7 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 						<li>Bid: <span>{this.props.bid}</span></li>
 					</ul>
 				</Flex>
+				<CrossButton onClick={() => this.testClick()} />
 			</Tile>
 		);
 	}

@@ -8,16 +8,8 @@ interface QuoteHistoryProps {
 }
 
 const QuoteHistoryList = styled.div`
-
 	background-color: ${props => props.theme.backgroundPrimary};
 	min-width: 200px;
-	h3{
-		position: relative;
-		top: 0;
-		margin: 0;
-		text-align: center;
-		color: ${ props => props.theme.secondary};
-	}
 `;
 
 class QuoteHistory extends React.Component<QuoteHistoryProps, void> {
@@ -39,7 +31,6 @@ class QuoteHistory extends React.Component<QuoteHistoryProps, void> {
 	render() {
 		return (
 			<QuoteHistoryList>
-				<h3>Quote History</h3>
 				{this.renderQuotes()}
 			</QuoteHistoryList>
 		);

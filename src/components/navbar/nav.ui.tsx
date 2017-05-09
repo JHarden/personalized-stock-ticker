@@ -6,8 +6,8 @@ import ClearButton from '../navbar/clear.ui';
 import BaseModel from '../base.model';
 
 const Nav = styled.div`
-    background-color: #f1f0f0;
-    height: 75px;
+    background-color: ${ props => props.theme.backgroundSecondary};
+    height: 50px;
 	display: flex;
 	justify-content: center;
 	padding: 20px 0 0;

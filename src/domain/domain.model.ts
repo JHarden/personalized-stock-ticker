@@ -30,6 +30,7 @@ class DomainModel {
 
 	@action.bound setQuote(quote: Quote) {
 
+		console.log('test');
 		if (this.isDuplicate(quote)) return;
 		this.quote = quote;
 		this.quoteHistory.push(this.quote);
