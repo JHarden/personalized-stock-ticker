@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Quote from '../../domain/qoute.model';
+import QuoteSnapshot from '../../domain/quote.snapshot.model';
 import QuoteTile from './quote.tile.ui';
 
 interface QuoteHistoryProps {
-	quotes: Quote[];
+	quotes: QuoteSnapshot[];
 }
 
 const QuoteHistoryList = styled.div`
@@ -16,14 +16,14 @@ class QuoteHistory extends React.Component<QuoteHistoryProps, void> {
 
 	private renderQuotes = () => {
 		return this.props.quotes.map((quote, index) => {
+			console.log('mapping quotes', quote);
 			return <QuoteTile
-				ask={quote.Ask}
-				bid={quote.Bid}
+				daysHigh={quote.DaysHigh}
+				daysLow={quote.DaysLow}
 				name={quote.Name}
 				symbol={quote.Symbol}
 				key={index}
 				change={quote.Change}
-				changePercent={quote.ChangeinPercent}
 			/>;
 		});
 	}

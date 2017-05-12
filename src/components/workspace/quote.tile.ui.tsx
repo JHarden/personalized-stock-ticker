@@ -9,10 +9,9 @@ import CrossButton from './ui/cross.button.ui';
 interface QuoteTileProps {
 	name: string;
 	symbol: string;
-	ask: string;
-	bid: string;
+	daysHigh: string;
+	daysLow: string;
 	change: string;
-	changePercent: string;
 }
 
 const Tile = styled.div`
@@ -68,7 +67,6 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 	@observable private isActive: boolean = false;
 
 	@action.bound setIsActive() {
-		console.log('setIsActive');
 		this.isActive = !this.isActive;
 	}
 
@@ -94,13 +92,12 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 				<Flex row spaceBetween>
 					<h4>{this.props.symbol} </h4>
 					<span>{this.renderChangeColor(this.props.change)}</span>
-					<span>{this.renderChangeColor(this.props.changePercent)}</span>
 				</Flex>
 				<label>{this.props.name}</label>
 				<Flex row>
 					<ul>
-						<li>Ask: <span>{this.props.ask}</span></li>
-						<li>Bid: <span>{this.props.bid}</span></li>
+						<li>Day High: <span>{this.props.daysHigh}</span></li>
+						<li>Day Low: <span>{this.props.daysLow}</span></li>
 					</ul>
 				</Flex>
 				{this.renderActiveState()}

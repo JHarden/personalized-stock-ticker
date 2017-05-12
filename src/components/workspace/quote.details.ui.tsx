@@ -4,8 +4,7 @@ import styled from 'styled-components';
 interface QuoteDetailProps {
 	name: string;
 	symbol: string;
-	ask: string;
-	bid: string;
+	stockExchange: string;
 	daysLow: string;
 	daysHigh: string;
 	yearLow: string;
@@ -30,8 +29,7 @@ class QuoteDetails extends React.Component<QuoteDetailProps, void> {
 				<ul>
 					<li>{this.props.name}</li>
 					<li>{this.props.symbol}</li>
-					<li>{this.props.ask}</li>
-					<li>{this.props.bid}</li>
+					<li>{this.props.stockExchange}</li>
 					<li>{this.props.daysLow}</li>
 					<li>{this.props.daysHigh}</li>
 					<li>{this.props.yearLow}</li>

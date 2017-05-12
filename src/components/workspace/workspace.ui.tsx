@@ -39,13 +39,12 @@ class Workspace extends React.Component<WorkspaceProps, void> {
 		if (this.props.domain.quote) {
 			return (
 				<QuoteDetails
-					ask={this.props.domain.quote.Ask}
-					bid={this.props.domain.quote.Bid}
+					stockExchange={this.props.domain.quote.StockExchange}
 					name={this.props.domain.quote.Name}
 					symbol={this.props.domain.quote.Symbol}
 					yearLow={this.props.domain.quote.YearLow}
 					yearHigh={this.props.domain.quote.YearHigh}
-					daysLow={this.props.domain.quote.DaysLow}
+					daysLow={this.props.domain.quote.DaysHigh}
 					daysHigh={this.props.domain.quote.DaysHigh}
 				/>
 			);
