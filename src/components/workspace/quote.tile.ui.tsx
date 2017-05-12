@@ -1,5 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { observable, action } from 'mobx';
+import { observer } from 'mobx-react';
+
 import Flex from '../generic/flex.ui';
 import CrossButton from './ui/cross.button.ui';
 
@@ -23,6 +26,7 @@ const Tile = styled.div`
 	color: #FFF;
 	padding: 10px;
 	position: relative;
+	cursor: pointer;
 	ul{
 		list-style: none;
 		padding: 0;
@@ -58,9 +62,15 @@ const Tile = styled.div`
 	}
 `;
 
-
-
+@observer
 class QuoteTile extends React.Component<QuoteTileProps, void> {
+
+	@observable private isActive: boolean = false;
+
+	@action.bound setIsActive() {
+		console.log('setIsActive');
+		this.isActive = !this.isActive;
+	}
 
 	private renderChangeColor(value: string) {
 		let color = parseFloat(value) >= 0 ? '#27d815' : '#d84e4e';
@@ -71,9 +81,16 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 		console.log('test click');
 	}
 
+	private renderActiveState = () => {
+
+		return(
+			this.isActive ? <CrossButton onClick={() => this.testClick()} /> : ''
+		);
+	}
+
 	render() {
 		return (
-			<Tile>
+			<Tile onClick={this.setIsActive}>
 				<Flex row spaceBetween>
 					<h4>{this.props.symbol} </h4>
 					<span>{this.renderChangeColor(this.props.change)}</span>
@@ -86,7 +103,7 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 						<li>Bid: <span>{this.props.bid}</span></li>
 					</ul>
 				</Flex>
-				<CrossButton onClick={() => this.testClick()} />
+				{this.renderActiveState()}
 			</Tile>
 		);
 	}

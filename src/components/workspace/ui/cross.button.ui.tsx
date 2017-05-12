@@ -7,8 +7,8 @@ const CustomButton = styled.button`
 	height: 20px;
 	display: block;
 	appearance: none;
-	border: 1px solid #CCC;
-	background-color: red;
+	border: 1px solid ${ props => props.theme.backgroundPrimary };
+	background-color: ${ props => props.theme.backgroundPrimary };
 	position: absolute;
 	right: -10px;
 	top: 50%;
