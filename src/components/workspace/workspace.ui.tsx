@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
 import DomainModel from '../../domain/domain.model';
-import Quote from '../../domain/qoute.model';
+import Quote from '../../domain/quote.model';
 import QuoteTile from './quote.tile.ui';
 import QuoteDetails from './quote.details.ui';
 import QuoteHistory from './quote.history.ui';
@@ -34,18 +34,21 @@ class Workspace extends React.Component<WorkspaceProps, void> {
 		this.props.domain.setQuoteHistory();
 	}
 
-
 	public renderQuote() {
-		if (this.props.domain.quote) {
+		if (this.props.domain.fullQuote) {
 			return (
 				<QuoteDetails
-					stockExchange={this.props.domain.quote.StockExchange}
-					name={this.props.domain.quote.Name}
-					symbol={this.props.domain.quote.Symbol}
-					yearLow={this.props.domain.quote.YearLow}
-					yearHigh={this.props.domain.quote.YearHigh}
-					daysLow={this.props.domain.quote.DaysHigh}
-					daysHigh={this.props.domain.quote.DaysHigh}
+					stockExchange={this.props.domain.fullQuote.StockExchange}
+					name={this.props.domain.fullQuote.Name}
+					symbol={this.props.domain.fullQuote.Symbol}
+					yearLow={this.props.domain.fullQuote.YearLow}
+					yearHigh={this.props.domain.fullQuote.YearHigh}
+					daysLow={this.props.domain.fullQuote.DaysHigh}
+					daysHigh={this.props.domain.fullQuote.DaysHigh}
+					ask={this.props.domain.fullQuote.Ask}
+					bid={this.props.domain.fullQuote.Bid}
+					marketCap={this.props.domain.fullQuote.MarketCapitalization}
+					percentChange={this.props.domain.fullQuote.PercentChange}
 				/>
 			);
 		}
@@ -55,7 +58,7 @@ class Workspace extends React.Component<WorkspaceProps, void> {
 		const { domain } = this.props;
 		return (
 			<StyledWorkspace>
-				<QuoteHistory quotes={domain.quoteHistory} />
+				<QuoteHistory quotes={domain.quoteHistory} onclick={(v) => domain.getFullQuote(v)} />
 				<MainQuotePanel>
 					{this.renderQuote()}
 				</MainQuotePanel>

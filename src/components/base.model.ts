@@ -12,7 +12,7 @@ class BaseModel {
 
 	constructor() {
 		this.domainModel = new DomainModel;
-		this.searchModel = new SearchModel((val: string) => this.domainModel.sendTestPost(val));
+		this.searchModel = new SearchModel((value: string) => this.domainModel.getMiniQuote(value));
 	}
 }
 

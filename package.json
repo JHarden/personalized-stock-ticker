@@ -5,7 +5,7 @@
   "description": "learning the trypescript react redux stack",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --port 8081"
+    "start": "webpack-dev-server --port 8081 --watch --inline"
   },
   "devDependencies": {
     "babel": "^6.5.2",

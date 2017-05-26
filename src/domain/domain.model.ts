@@ -2,38 +2,52 @@
 import { action, observable } from 'mobx';
 import { Observable } from 'rxjs';
 import QuoteSnapshot from './quote.snapshot.model';
+import Quote from './quote.model';
 
 const YQL_BASE = `https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quote where symbol =`;
+const YQL_FULL = `https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol =`;
 const YQL_POST = `&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=`;
+const AUTOCOMPLETE = `http://autoc.finance.yahoo.com/autoc?query=weed&region=EU&lang=en-GB`;
 class DomainModel {
 
 	@observable quote: QuoteSnapshot;
+	@observable fullQuote: Quote;
 	@observable quoteHistory: QuoteSnapshot[] = [];
 
-	@action.bound sendTestPost(input: string) {
+	@action.bound getMiniQuote(input: string) {
 
 		let apiCall = YQL_BASE + `'` + input + `'` + YQL_POST;
-
-		(<any>Observable).ajax({
-			url: apiCall,
-			crossDomain: true,
-			withCredentials: false
-		})
+		this.load(apiCall)
 			.subscribe(
-			(r: any) => {
-				let stockQoute = r.response.query.results.quote;
+			value => {
+				let stockQoute = value.query.results.quote;
 				this.setQuote(stockQoute as QuoteSnapshot);
 			},
-			(err: any) => console.log('ajax err', err)
+			e => console.log('ajax err', e)
+			);
+	}
+
+	@action.bound getFullQuote(input: string) {
+		let apiCall = YQL_FULL + `'` + input + `'` + YQL_POST;
+		this.load(apiCall)
+			.subscribe(
+			value => {
+				let stockQoute = value.query.results.quote;
+				this.setMainPanelQuote(stockQoute as Quote);
+			},
+			e => console.log('ajax err', e)
 			);
 	}
 
 	@action.bound setQuote(quote: QuoteSnapshot) {
-		console.log('test', quote);
 		if (this.isDuplicate(quote)) return;
 		this.quote = quote;
 		this.quoteHistory.push(this.quote);
 		localStorage.setItem('stockQuoteHistory', JSON.stringify(this.quoteHistory));
+	}
+
+	@action.bound setMainPanelQuote(quote: Quote) {
+		this.fullQuote = quote;
 	}
 
 	@action.bound getQuoteHistory() {
@@ -68,6 +82,46 @@ class DomainModel {
 		return false;
 	}
 
+	private load(url: string) {
+		return Observable.create(observer => {
+			let xhr = new XMLHttpRequest();
+			let onload = () => {
+				if (xhr.status === 200) {
+					let data = JSON.parse(xhr.responseText);
+					observer.next(data);
+					observer.complete();
+				} else {
+					observer.error(xhr.statusText);
+				}
+			};
+			xhr.addEventListener('load', onload);
+
+			xhr.open('GET', url);
+			xhr.send();
+
+			return () => {
+				xhr.removeEventListener('load', onload);
+				xhr.abort();
+			};
+		}).retryWhen(this.retryStrategy({ attempts: 3, delay: 1000 }));
+	}
+
+	// logic for retying a failed observable subscription
+	private retryStrategy({ attempts = 3, delay = 1000 } = {}) {
+		return function (errors) {
+			return errors
+				.scan((acc, value) => {
+					acc += 1;
+					if (acc < attempts) {
+						return acc;
+					} else {
+						throw new Error(value);
+					}
+				}, 0)
+				.takeWhile(acc => acc < attempts)
+				.delay(delay);
+		};
+	}
 }
 
 export default DomainModel;

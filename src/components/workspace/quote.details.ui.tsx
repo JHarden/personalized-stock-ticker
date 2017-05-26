@@ -9,6 +9,10 @@ interface QuoteDetailProps {
 	daysHigh: string;
 	yearLow: string;
 	yearHigh: string;
+	ask: string;
+	bid: string;
+	marketCap: string;
+	percentChange: string;
 }
 
 const Tile = styled.div`
@@ -34,6 +38,10 @@ class QuoteDetails extends React.Component<QuoteDetailProps, void> {
 					<li>{this.props.daysHigh}</li>
 					<li>{this.props.yearLow}</li>
 					<li>{this.props.yearHigh}</li>
+					<li>{this.props.ask}</li>
+					<li>{this.props.bid}</li>
+					<li>{this.props.marketCap}</li>
+					<li>{this.props.percentChange}</li>
 				</ul>
 			</Tile>
 		);
