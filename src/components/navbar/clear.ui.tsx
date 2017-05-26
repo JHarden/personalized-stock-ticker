@@ -12,10 +12,12 @@ const Clear = styled.button`
 	border: none;
 
 	height: 30px;
-	width: 30px;
+	width: 60px;
 	background: #EBEBEB;
 	display: block;
-
+	position: absolute;
+	right: 20px;
+	cursor: pointer;
 `;
 
 class ClearButton extends React.Component<ClearButtonProps, void> {

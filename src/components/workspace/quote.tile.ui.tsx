@@ -77,7 +77,6 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 	}
 
 	private renderActiveState = () => {
-
 		return (
 			this.isActive ? <CrossButton onClick={() => this.testClick()} /> : ''
 		);
