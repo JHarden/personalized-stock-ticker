@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Search from './search.ui';
 import ClearButton from '../navbar/clear.ui';
 import BaseModel from '../base.model';
+import SearchResults from './search.result.ui';
 
 const Nav = styled.div`
     background-color: ${ props => props.theme.backgroundSecondary};
@@ -11,6 +12,7 @@ const Nav = styled.div`
 	display: flex;
 	justify-content: center;
 	padding: 20px 0 0;
+	width: 100%;
 `;
 
 interface NavbarProps {
@@ -22,6 +24,7 @@ const Navbar = (props: NavbarProps) => {
 		<Nav>
 			<Search model={props.model.searchModel} />
 			<ClearButton onClick={() => props.model.domainModel.clearQuoteHistory()} />
+			<SearchResults />
 		</Nav>
 	);
 };

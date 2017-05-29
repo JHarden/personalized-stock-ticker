@@ -7,12 +7,25 @@ import Quote from './quote.model';
 const YQL_BASE = `https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quote where symbol =`;
 const YQL_FULL = `https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol =`;
 const YQL_POST = `&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=`;
-const AUTOCOMPLETE = `http://autoc.finance.yahoo.com/autoc?query=weed&region=EU&lang=en-GB`;
+const AUTOCOMPLETE = `http://autoc.finance.yahoo.com/autoc?query=`;
+const AUTOCOMPLETE_STUB = `&region=EU&lang=en-GB`;
+
 class DomainModel {
 
 	@observable quote: QuoteSnapshot;
 	@observable fullQuote: Quote;
 	@observable quoteHistory: QuoteSnapshot[] = [];
+
+	@action.bound autocompleteSearch(input: string) {
+		console.log('auto', input);
+
+		let apiCall = AUTOCOMPLETE + input + AUTOCOMPLETE_STUB;
+		this.load(apiCall).subscribe(
+			value => console.log('value', value),
+			error => console.log('error', error),
+			() => console.log('complete')
+		);
+	}
 
 	@action.bound getMiniQuote(input: string) {
 
