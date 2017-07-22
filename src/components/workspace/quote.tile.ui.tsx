@@ -27,6 +27,11 @@ const Tile = styled.div`
 	padding: 10px;
 	position: relative;
 	cursor: pointer;
+
+	&:hover{
+		background-color: ${props => props.theme.highlight};
+	}
+
 	ul{
 		list-style: none;
 		padding: 0;
@@ -50,7 +55,7 @@ const Tile = styled.div`
 	}
 	label{
 		font-size: 12px;
-		color: #ababd6;
+		color: ${props => props.theme.fontColor};
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;

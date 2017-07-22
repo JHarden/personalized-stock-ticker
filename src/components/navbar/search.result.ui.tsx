@@ -6,12 +6,13 @@ import BaseModel from '../base.model';
 import { SearchResult } from '../../components/common/types';
 
 const SearchResultsBar = styled.ul`
-	background-color: ${ props => props.theme.backgroundSecondary};
+	background-color: transparent;
 	position: absolute;
     height: auto;
 	display: flex;
 	flex-direction: column;
 	jusfiy-content: center;
+	align-items: center;
 	width: 100%;
 	margin: 0;
 	list-style-type: none;
@@ -22,13 +23,19 @@ const SearchResultsBar = styled.ul`
 interface SearchResultsProps {
 	children?: React.ReactNode;
 	suggestions: SearchResult[];
+	onClick: (val: string) => void;
 }
 
 const ResultItem = styled.li`
 	height: 50px;
 	width: 100%;
-	background: #FFF;
-	color: grey;
+	background-color: ${props => props.theme.backgroundSecondary};
+	border: 1px solid ${props => props.theme.backgroundPrimary};
+	color: #FFF;
+	cursor: pointer;
+	&:hover{
+		background-color: ${props => props.theme.highlight};
+	}
 `;
 
 class SearchResults extends React.Component<SearchResultsProps, void> {
@@ -39,7 +46,7 @@ class SearchResults extends React.Component<SearchResultsProps, void> {
 
 		return this.props.suggestions.map((suggestion, index) => {
 			return (
-				<ResultItem key={index}>
+				<ResultItem key={index} onClick={() => this.props.onClick(suggestion.symbol)}>
 					<span>{suggestion.name}</span><span>{suggestion.symbol}</span>
 				</ResultItem>);
 		});

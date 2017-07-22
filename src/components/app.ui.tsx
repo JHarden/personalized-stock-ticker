@@ -28,7 +28,8 @@ injectGlobal`
 const theme = {
 	backgroundPrimary: '#272c33',
 	backgroundSecondary: '#3f4652',
-	secondary: '#ababd6',
+	fontColor: '#ababd6',
+	highlight: '#5d6675',
 	negative: '#d84e4e',
 	positive: '#27d815',
 

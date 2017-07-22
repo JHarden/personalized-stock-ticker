@@ -43,7 +43,7 @@ class Navbar extends React.Component<NavbarProps, void> {
 					<ClearButton onClick={() => model.domainModel.clearQuoteHistory()} />
 				</Nav>
 				<SearchResultsWrapper>
-					<SearchResults suggestions={model.domainModel.suggestedTickers} />
+					<SearchResults suggestions={model.domainModel.suggestedTickers} onClick={(val) => model.domainModel.getMiniQuote(val)}/>
 				</SearchResultsWrapper>
 			</div>
 		)
