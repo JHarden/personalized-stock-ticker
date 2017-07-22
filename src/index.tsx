@@ -6,6 +6,6 @@ import App from './components/app.ui';
 
 
 ReactDOM.render(
-		<App/>,
+		<App children={<div></div>}/>,
 	document.getElementById('react')
 );

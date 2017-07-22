@@ -5,6 +5,7 @@ import Search from './search.ui';
 import ClearButton from '../navbar/clear.ui';
 import BaseModel from '../base.model';
 import SearchResults from './search.result.ui';
+import Flex from '../common/flex.ui';
 
 const Nav = styled.div`
     background-color: ${ props => props.theme.backgroundSecondary};
@@ -15,18 +16,38 @@ const Nav = styled.div`
 	width: 100%;
 `;
 
+const SearchResultsWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	display: block;
+`;
+
 interface NavbarProps {
 	model: BaseModel;
 }
 
-const Navbar = (props: NavbarProps) => {
-	return (
-		<Nav>
-			<Search model={props.model.searchModel} />
-			<ClearButton onClick={() => props.model.domainModel.clearQuoteHistory()} />
-			<SearchResults />
-		</Nav>
-	);
-};
+@observer
+class Navbar extends React.Component<NavbarProps, void> {
+
+	render() {
+		const { model } = this.props;
+		return (
+			<div>
+				<Nav>
+					<Flex column center fill>
+						<Search model={model.searchModel} />
+					</Flex>
+					<ClearButton onClick={() => model.domainModel.clearQuoteHistory()} />
+				</Nav>
+				<SearchResultsWrapper>
+					<SearchResults suggestions={model.domainModel.suggestedTickers} />
+				</SearchResultsWrapper>
+			</div>
+		)
+	}
+}
 
 export default Navbar;

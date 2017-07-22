@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 
-import Flex from '../generic/flex.ui';
+import Flex from '../common/flex.ui';
 import CrossButton from './ui/cross.button.ui';
 
 interface QuoteTileProps {

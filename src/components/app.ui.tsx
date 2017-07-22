@@ -34,10 +34,15 @@ const theme = {
 
 };
 
+interface AppProps {
+	children: React.ReactNode;
+}
+
 @observer
-class App extends React.Component<void, void>{
+class App extends React.Component<AppProps, void> {
 
 	render() {
+		const {children} = this.props;
 		return (
 				<ThemeProvider theme={theme}>
 					<div>
@@ -45,6 +50,7 @@ class App extends React.Component<void, void>{
 						<Workspace domain={baseModel.domainModel} />
 					</div>
 				</ThemeProvider>
+
 		);
 	}
 }

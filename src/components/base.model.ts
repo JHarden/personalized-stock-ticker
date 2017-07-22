@@ -12,7 +12,10 @@ class BaseModel {
 
 	constructor() {
 		this.domainModel = new DomainModel;
-		this.searchModel = new SearchModel((value: string) => this.domainModel.getMiniQuote(value));
+		this.searchModel = new SearchModel(
+			(value: string) => this.domainModel.getMiniQuote(value),
+			(value: string) => this.domainModel.autocompleteSearch(value),
+		);
 	}
 }
 

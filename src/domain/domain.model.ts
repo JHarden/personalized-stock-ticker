@@ -3,25 +3,36 @@ import { action, observable } from 'mobx';
 import { Observable } from 'rxjs';
 import QuoteSnapshot from './quote.snapshot.model';
 import Quote from './quote.model';
+import { SearchResult } from '../components/common/types';
 
 const YQL_BASE = `https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quote where symbol =`;
 const YQL_FULL = `https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol =`;
 const YQL_POST = `&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=`;
-const AUTOCOMPLETE = `http://autoc.finance.yahoo.com/autoc?query=`;
-const AUTOCOMPLETE_STUB = `&region=EU&lang=en-GB`;
+const AUTOCOMPLETE = `https://s.yimg.com/aq/autoc?query=`;
+const AUTOCOMPLETE_STUB = `&region=CA&lang=en-CA`;
 
 class DomainModel {
 
 	@observable quote: QuoteSnapshot;
 	@observable fullQuote: Quote;
 	@observable quoteHistory: QuoteSnapshot[] = [];
+	@observable suggestedTickers: SearchResult[];
+
+	@action.bound setSuggestedTickers( suggestions: SearchResult[]){
+		this.suggestedTickers = suggestions;
+	}
 
 	@action.bound autocompleteSearch(input: string) {
 		console.log('auto', input);
 
 		let apiCall = AUTOCOMPLETE + input + AUTOCOMPLETE_STUB;
 		this.load(apiCall).subscribe(
-			value => console.log('value', value),
+			value => {
+				console.log('value', value);
+				this.setSuggestedTickers(value.ResultSet.Result);
+
+				console.log('resultset', this.suggestedTickers);
+			},
 			error => console.log('error', error),
 			() => console.log('complete')
 		);
@@ -98,6 +109,7 @@ class DomainModel {
 	private load(url: string) {
 		return Observable.create(observer => {
 			let xhr = new XMLHttpRequest();
+
 			let onload = () => {
 				if (xhr.status === 200) {
 					let data = JSON.parse(xhr.responseText);

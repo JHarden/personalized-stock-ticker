@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 
 const StyledInput = styled.input`
-
 	width: 200px;
 	height: 20px;
 `;
@@ -21,9 +20,13 @@ class Search extends React.Component<SearchProps, void> {
 	}
 
 	private onApply(key?: number) {
-		if (key && key !== 13)
-			return;
+		// if (key && key !== 13)
+		// 	return;else{}
+		if( key && key === 13){
 		this.props.model.sendSearch();
+		}else {
+			// this.props.model.sendSuggestion();
+		}
 	}
 
 	render() {
