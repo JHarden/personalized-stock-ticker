@@ -4,8 +4,41 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 
 const StyledInput = styled.input`
-	width: 200px;
-	height: 20px;
+    width: 100%;
+    height: 50px;
+    font-size: 45px;
+    color: #FFF;
+    border: none;
+	background: transparent;
+	border-bottom: 2px solid ${ props => props.theme.highlight};
+	font-weight: bold;
+
+	&:focus{
+		outline: none;
+	}
+
+	&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+   	color: ${ props => props.theme.highlight};
+	}
+
+	&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		color: ${ props => props.theme.highlight};
+		opacity:  1;
+	}
+
+	&::-moz-placeholder { /* Mozilla Firefox 19+ */
+		color: ${ props => props.theme.highlight};
+		opacity:  1;
+	}
+
+	&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color: ${ props => props.theme.highlight};
+	}
+
+	&::-ms-input-placeholder { /* Microsoft Edge */
+		color: ${ props => props.theme.highlight};
+	}
+}
 `;
 
 interface SearchProps {
@@ -22,9 +55,9 @@ class Search extends React.Component<SearchProps, void> {
 	private onApply(key?: number) {
 		// if (key && key !== 13)
 		// 	return;else{}
-		if( key && key === 13){
-		this.props.model.sendSearch();
-		}else {
+		if (key && key === 13) {
+			this.props.model.sendSearch();
+		} else {
 			// this.props.model.sendSuggestion();
 		}
 	}
@@ -33,9 +66,9 @@ class Search extends React.Component<SearchProps, void> {
 		const { model } = this.props;
 		return (
 			<div>
-				<StyledInput type='text' onChange={(value) => this.onChange(value)}
+				<StyledInput placeholder='Search for a stock' type='text' onChange={(value) => this.onChange(value)}
 					onKeyPress={(e) => this.onApply(e.charCode)} />
-				<button onClick={(e) => this.onApply()}>Search!</button>
+				{/* <button onClick={(e) => this.onApply()}>Search!</button> */}
 			</div>
 		);
 	}

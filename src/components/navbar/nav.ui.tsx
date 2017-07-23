@@ -12,7 +12,7 @@ const Nav = styled.div`
     height: 50px;
 	display: flex;
 	justify-content: center;
-	padding: 20px 0 0;
+	padding: 20px 0;
 	width: 100%;
 `;
 

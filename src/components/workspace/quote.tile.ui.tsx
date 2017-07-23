@@ -13,6 +13,7 @@ interface QuoteTileProps {
 	daysLow: string;
 	change: string;
 	onclick: (symbol: string) => void;
+	isActive: boolean;
 }
 
 const Tile = styled.div`
@@ -70,7 +71,6 @@ const Tile = styled.div`
 @observer
 class QuoteTile extends React.Component<QuoteTileProps, void> {
 
-	@observable private isActive: boolean = false;
 
 	private renderChangeColor(value: string) {
 		let color = parseFloat(value) >= 0 ? '#27d815' : '#d84e4e';
@@ -83,7 +83,7 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 
 	private renderActiveState = () => {
 		return (
-			this.isActive ? <CrossButton onClick={() => this.testClick()} /> : ''
+			this.props.isActive ? <CrossButton onClick={() => this.testClick()} /> : ''
 		);
 	}
 

@@ -28,6 +28,7 @@ class QuoteHistory extends React.Component<QuoteHistoryProps, void> {
 				key={index}
 				change={quote.Change}
 				onclick={(value) => this.props.onclick(value)}
+				isActive={false}
 			/>;
 		});
 	}
