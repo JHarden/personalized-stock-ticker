@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
+import { computed } from 'mobx';
 
 import Flex from '../common/flex.ui';
 import CrossButton from './ui/cross.button.ui';
@@ -14,6 +14,7 @@ interface QuoteTileProps {
 	change: string;
 	onclick: (symbol: string) => void;
 	isActive: boolean;
+	lastTrade: string;
 }
 
 const Tile = styled.div`
@@ -68,13 +69,18 @@ const Tile = styled.div`
 	}
 `;
 
+const LastTrade = styled.div`
+	position: absolute;
+	bottom: 15px;
+	right: 5px;
+	font-size: 20px;
+`;
+
 @observer
 class QuoteTile extends React.Component<QuoteTileProps, void> {
 
-
-	private renderChangeColor(value: string) {
-		let color = parseFloat(value) >= 0 ? '#27d815' : '#d84e4e';
-		return <span style={{ color: color }}>{value}</span>;
+	@computed get changeColor() {
+		return parseFloat(this.props.change) >= 0 ? '#27d815' : '#d84e4e';
 	}
 
 	private testClick() {
@@ -88,18 +94,21 @@ class QuoteTile extends React.Component<QuoteTileProps, void> {
 	}
 
 	render() {
+
+		const { onclick, symbol, change, name, daysHigh, daysLow, lastTrade } = this.props;
 		return (
-			<Tile onClick={() => this.props.onclick(this.props.symbol)}>
+			<Tile onClick={() => onclick(symbol)}>
 				<Flex row spaceBetween>
-					<h4>{this.props.symbol} </h4>
-					<span>{this.renderChangeColor(this.props.change)}</span>
+					<h4>{symbol} </h4>
+					<span style={{ color: this.changeColor }}>{change}</span>
 				</Flex>
-				<label>{this.props.name}</label>
+				<label>{name}</label>
 				<Flex row>
 					<ul>
-						<li>Day High: <span>{this.props.daysHigh}</span></li>
-						<li>Day Low: <span>{this.props.daysLow}</span></li>
+						<li>Day High: <span>{daysHigh}</span></li>
+						<li>Day Low: <span>{daysLow}</span></li>
 					</ul>
+					<LastTrade style={{ color: this.changeColor }}>{lastTrade}</LastTrade>
 				</Flex>
 				{this.renderActiveState()}
 			</Tile>

@@ -3,8 +3,6 @@ import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
 import DomainModel from '../../domain/domain.model';
-import Quote from '../../domain/quote.model';
-import QuoteTile from './quote.tile.ui';
 import QuoteDetails from './quote.details.ui';
 import QuoteHistory from './quote.history.ui';
 
@@ -51,7 +49,7 @@ class Workspace extends React.Component<WorkspaceProps, void> {
 					percentChange={this.props.domain.fullQuote.PercentChange}
 				/>
 			);
-		}
+		}else return '';
 	}
 
 	render() {

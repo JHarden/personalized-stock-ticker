@@ -1,8 +1,5 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 import styled from 'styled-components';
-import ClearButton from '../navbar/clear.ui';
-import BaseModel from '../base.model';
 import { SearchResult } from '../../components/common/types';
 
 const SearchResultsBar = styled.ul`
@@ -41,10 +38,7 @@ const ResultItem = styled.li`
 class SearchResults extends React.Component<SearchResultsProps, void> {
 
 	private getSearchReslts() {
-		if (this.props.suggestions === undefined)
-			return;
-
-		return this.props.suggestions.map((suggestion, index) => {
+		return this.props.suggestions && this.props.suggestions.map((suggestion, index) => {
 			return (
 				<ResultItem key={index} onClick={() => this.props.onClick(suggestion.symbol)}>
 					<span>{suggestion.name}</span><span>{suggestion.symbol}</span>

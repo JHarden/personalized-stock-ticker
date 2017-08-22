@@ -43,7 +43,6 @@ interface AppProps {
 class App extends React.Component<AppProps, void> {
 
 	render() {
-		const {children} = this.props;
 		return (
 				<ThemeProvider theme={theme}>
 					<div>

@@ -46,6 +46,7 @@ class DomainModel {
 			value => {
 				let stockQoute = value.query.results.quote;
 				this.setQuote(stockQoute as QuoteSnapshot);
+				console.log('mini quote: ', stockQoute);
 				this.setSuggestedTickers([]);
 			},
 			e => console.log('ajax err', e)

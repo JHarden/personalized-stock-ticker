@@ -63,12 +63,10 @@ class Search extends React.Component<SearchProps, void> {
 	}
 
 	render() {
-		const { model } = this.props;
 		return (
 			<div>
 				<StyledInput placeholder='Search for a stock' type='text' onChange={(value) => this.onChange(value)}
 					onKeyPress={(e) => this.onApply(e.charCode)} />
-				{/* <button onClick={(e) => this.onApply()}>Search!</button> */}
 			</div>
 		);
 	}

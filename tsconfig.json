@@ -6,9 +6,23 @@
 		"target": "es5",
 		"jsx": "react",
 		"experimentalDecorators": true,
-		"lib": ["es2017", "dom"]
+		"lib": [
+			"es2017",
+			"dom"
+		],
+
+		/* Additional Checks */
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true
 	},
-  "paths": {
-		"*": ["./*", "../typings/*", "*"]
+
+	"paths": {
+		"*": [
+			"./*",
+			"../typings/*",
+			"*"
+		]
 	}
 }

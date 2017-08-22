@@ -1,6 +1,5 @@
 
 import { observable, action } from 'mobx';
-import DomainModel from '../../domain/domain.model';
 
 class SearchModel {
 
