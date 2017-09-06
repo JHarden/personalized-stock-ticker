@@ -27,7 +27,7 @@ class QuoteHistory extends React.Component<QuoteHistoryProps, void> {
 				symbol={quote.Symbol}
 				key={index}
 				change={quote.Change}
-				onclick={(value) => this.props.onclick(value)}
+				onclick={this.props.onclick}
 				isActive={false}
 				lastTrade={quote.LastTradePriceOnly}
 			/>;

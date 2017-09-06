@@ -10,12 +10,102 @@ const StyledInput = styled.input`
     color: #FFF;
     border: none;
 	background: transparent;
-	border-bottom: 2px solid ${ props => props.theme.highlight};
 	font-weight: bold;
+	transition: all 0.25s ease-out;
+
+	&+span{
+		height: 2px;
+		width: 100%;
+		background: ${ props => props.theme.highlight};
+		display: block;
+		>span{
+			transition: max-width 0.25s ease-out;
+			background: #7facf9;
+			height: 2px;
+			max-width: 0%;
+			display: block;
+			width: 100%;
+		}
+		/** right span */
+		&+span{
+			height: 52px;
+			display: block;
+			width: 2px;
+			position: absolute;
+			right: 0;
+			background: ${ props => props.theme.highlight};
+			top: 0;
+			>span{
+				transition: max-height 0.25s ease-out;
+				background: #7facf9;
+				height: 2px;
+				max-height: 0%;
+				display: block;
+				height: 100%;
+			}
+			/** top span */
+			&+span{
+				height: 2px;
+				width: 100%;
+				background: #7facf9;
+				position: absolute;
+				top: 0;
+				>span{
+					transition: max-width 0.25s ease-out;
+					background: ${ props => props.theme.highlight};
+					height: 2px;
+					max-width: 100%;
+					display: block;
+					width: 100%;
+				}
+				/** left span */
+				&+span{
+				height: 52px;
+				display: block;
+				width: 2px;
+				position: absolute;
+				left: 0;
+				background: #7facf9;
+				top: 0;
+					>span{
+						transition: max-height 0.25s ease-out;
+						background: ${ props => props.theme.highlight};
+						height: 2px;
+						max-height: 100%;
+						display: block;
+						height: 100%;
+					}
+				}
+			}
+		}
+	}
 
 	&:focus{
 		outline: none;
+		color: #7facf9;
+		&+span{
+			&>span{
+				max-width: 100%;
+			}
+			&+span{
+				&>span{
+					max-height: 100%;
+				}
+				&+span{
+					&>span{
+						max-width: 0%;
+					}
+					&+span{
+						&>span{
+							max-height: 0%;
+						}
+					}
+				}
+			}
+		}
 	}
+	
+
 
 	&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
    	color: ${ props => props.theme.highlight};
@@ -67,6 +157,10 @@ class Search extends React.Component<SearchProps, void> {
 			<div>
 				<StyledInput placeholder='Search for a stock' type='text' onChange={(value) => this.onChange(value)}
 					onKeyPress={(e) => this.onApply(e.charCode)} />
+				<span><span></span></span>
+				<span><span></span></span>
+				<span><span></span></span>
+				<span><span></span></span>
 			</div>
 		);
 	}

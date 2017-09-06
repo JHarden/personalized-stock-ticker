@@ -19,7 +19,7 @@ interface QuoteTileProps {
 
 const Tile = styled.div`
 	height: 75px;
-	width: 180px;
+	width: 250px;
 	border-top: 1px solid ${props => props.theme.backgroundPrimary};
 	border-bottom: 1px solid ${props => props.theme.backgroundPrimary};
 	font-size: 12px;
@@ -62,7 +62,7 @@ const Tile = styled.div`
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		display: block;
-		width: 180px;
+		width: 250px;
 	}
 	div{
 		display:flex;

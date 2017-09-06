@@ -4,7 +4,7 @@ import { SearchResult } from '../../components/common/types';
 
 const SearchResultsBar = styled.ul`
 	background-color: transparent;
-	position: absolute;
+	position: relative;
     height: auto;
 	display: flex;
 	flex-direction: column;

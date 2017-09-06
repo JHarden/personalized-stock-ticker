@@ -56,7 +56,7 @@ class Workspace extends React.Component<WorkspaceProps, void> {
 		const { domain } = this.props;
 		return (
 			<StyledWorkspace>
-				<QuoteHistory quotes={domain.quoteHistory} onclick={(v) => domain.getFullQuote(v)} />
+				<QuoteHistory quotes={domain.quoteHistory} onclick={domain.getFullQuote} />
 				<MainQuotePanel>
 					{this.renderQuote()}
 				</MainQuotePanel>

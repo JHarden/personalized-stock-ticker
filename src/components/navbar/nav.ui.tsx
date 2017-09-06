@@ -16,18 +16,14 @@ const Nav = styled.div`
 	width: 100%;
 `;
 
-const SearchResultsWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-	display: block;
-`;
-
 interface NavbarProps {
 	model: BaseModel;
 }
+
+const Column = styled.div`
+	width: 600px;
+	position: relative;
+`;
 
 @observer
 class Navbar extends React.Component<NavbarProps, void> {
@@ -38,13 +34,15 @@ class Navbar extends React.Component<NavbarProps, void> {
 			<div>
 				<Nav>
 					<Flex column center fill>
-						<Search model={model.searchModel} />
+						<Column>
+							<Search model={model.searchModel} />
+						</Column>
+						<Column>
+							<SearchResults suggestions={model.domainModel.suggestedTickers} onClick={(val) => model.domainModel.getMiniQuote(val)} />
+						</Column>
 					</Flex>
 					<ClearButton onClick={() => model.domainModel.clearQuoteHistory()} />
 				</Nav>
-				<SearchResultsWrapper>
-					<SearchResults suggestions={model.domainModel.suggestedTickers} onClick={(val) => model.domainModel.getMiniQuote(val)}/>
-				</SearchResultsWrapper>
 			</div>
 		)
 	}
