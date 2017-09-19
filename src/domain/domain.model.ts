@@ -39,7 +39,10 @@ class DomainModel {
 	}
 
 	@action.bound getMiniQuote(input: string) {
-
+		if(!input){
+			this.setSuggestedTickers([]);
+			return;
+		}
 		let apiCall = YQL_BASE + `'` + input + `'` + YQL_POST;
 		this.load(apiCall)
 			.subscribe(

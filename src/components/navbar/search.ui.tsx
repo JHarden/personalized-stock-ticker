@@ -143,13 +143,10 @@ class Search extends React.Component<SearchProps, void> {
 	}
 
 	private onApply(key?: number) {
-		// if (key && key !== 13)
-		// 	return;else{}
+
 		if (key && key === 13) {
 			this.props.model.sendSearch();
-		} else {
-			// this.props.model.sendSuggestion();
-		}
+		} 
 	}
 
 	render() {

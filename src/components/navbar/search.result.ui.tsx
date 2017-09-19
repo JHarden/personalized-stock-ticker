@@ -30,9 +30,43 @@ const ResultItem = styled.li`
 	border: 1px solid ${props => props.theme.backgroundPrimary};
 	color: #FFF;
 	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 	&:hover{
 		background-color: ${props => props.theme.highlight};
 	}
+	&>div{
+		padding: 0 10px;
+	}
+`;
+
+const StockExchange = styled.div`
+	text-align: right;
+	width: 20%;
+`;
+
+const StockSymbol = styled.div`
+	text-align: left;
+	width: 20%;
+	color: ${props => props.theme.positive};
+`;
+
+const StockName = styled.div`
+	text-align: center;
+	width: 60%;
+	color: ${props => props.theme.fontColor};
+`;
+
+const Mask = styled.div`
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
 `;
 
 class SearchResults extends React.Component<SearchResultsProps, void> {
@@ -41,17 +75,32 @@ class SearchResults extends React.Component<SearchResultsProps, void> {
 		return this.props.suggestions && this.props.suggestions.map((suggestion, index) => {
 			return (
 				<ResultItem key={index} onClick={() => this.props.onClick(suggestion.symbol)}>
-					<span>{suggestion.name}</span><span>{suggestion.symbol}</span>
+					<StockSymbol>
+						<span>{suggestion.symbol}</span>
+					</StockSymbol>
+					<StockName>
+						<span>{suggestion.name}</span>
+					</StockName>
+					<StockExchange>
+						<span>{suggestion.exchDisp}</span>
+					</StockExchange>
 				</ResultItem>);
 		});
 	}
 
 	render() {
 		return (
-			<SearchResultsBar>
-				{this.getSearchReslts()}
-			</SearchResultsBar>
+			<span>
+				{this.props.suggestions && this.props.suggestions.length ? <Mask onClick={this.onClickMask}/> : '' }
+				<SearchResultsBar>
+					{this.getSearchReslts()}
+				</SearchResultsBar>
+			</span>
 		);
+	}
+
+	private onClickMask= ()=> {
+		this.props.onClick(null);
 	}
 
 }
