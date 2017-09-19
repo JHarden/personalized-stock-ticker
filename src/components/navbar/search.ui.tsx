@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 
 const StyledInput = styled.input`
-    width: 100%;
-    height: 50px;
-    font-size: 45px;
-    color: #FFF;
-    border: none;
+	width: 100%;
+	height: 50px;
+	font-size: 42px;
+	padding-left: 10px;
+	color: #FFF;
+	border: none;
 	background: transparent;
 	font-weight: bold;
 	transition: all 0.25s ease-out;
@@ -146,7 +147,7 @@ class Search extends React.Component<SearchProps, void> {
 
 		if (key && key === 13) {
 			this.props.model.sendSearch();
-		} 
+		}
 	}
 
 	render() {
