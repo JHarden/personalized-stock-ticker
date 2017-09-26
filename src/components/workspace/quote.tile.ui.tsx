@@ -17,6 +17,7 @@ interface QuoteTileProps {
 	lastTrade: string;
 }
 
+
 const Tile = styled.div`
 	height: 75px;
 	width: 250px;

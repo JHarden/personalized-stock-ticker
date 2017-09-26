@@ -18,7 +18,7 @@ class DomainModel {
 	@observable quoteHistory: QuoteSnapshot[] = [];
 	@observable suggestedTickers: SearchResult[];
 
-	@action.bound setSuggestedTickers( suggestions: SearchResult[]){
+	@action.bound setSuggestedTickers(suggestions: SearchResult[]) {
 		this.suggestedTickers = suggestions;
 	}
 
@@ -39,7 +39,7 @@ class DomainModel {
 	}
 
 	@action.bound getMiniQuote(input: string) {
-		if(!input){
+		if (!input) {
 			this.setSuggestedTickers([]);
 			return;
 		}
@@ -71,7 +71,13 @@ class DomainModel {
 	@action.bound setQuote(quote: QuoteSnapshot) {
 		if (this.isDuplicate(quote)) return;
 		this.quote = quote;
-		this.quoteHistory.push(this.quote);
+
+		const test = this.quoteHistory.indexOf(undefined);
+		if(test !== -1){
+			this.quoteHistory[test] = this.quote;
+		}else{
+			this.quoteHistory.push(this.quote);
+		}
 		localStorage.setItem('stockQuoteHistory', JSON.stringify(this.quoteHistory));
 	}
 
@@ -94,17 +100,24 @@ class DomainModel {
 
 	public setQuoteHistory() {
 		let quotes = JSON.parse(localStorage.getItem('stockQuoteHistory'));
+
+		for (let i = 0; i < quotes.length; i++) {
+			this.pushQuoteHistory(undefined);
+		}
+
 		if (quotes !== null) {
 			for (let item of quotes) {
-				let qt = item as QuoteSnapshot;
-				this.pushQuoteHistory(qt);
+				if (item) {
+					let qt = item as QuoteSnapshot;
+					this.getMiniQuote(qt.Symbol);
+				}
 			}
 		}
 	}
 
 	private isDuplicate(quote: QuoteSnapshot): boolean {
 		for (let q of this.quoteHistory) {
-			if (q.Name === quote.Name) {
+			if (q && q.Name === quote.Name) {
 				return true;
 			};
 		}
