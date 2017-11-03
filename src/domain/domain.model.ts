@@ -47,10 +47,17 @@ class DomainModel {
 		this.load(apiCall)
 			.subscribe(
 			value => {
-				let stockQoute = value.query.results.quote;
-				this.setQuote(stockQoute as QuoteSnapshot);
-				console.log('mini quote: ', stockQoute);
-				this.setSuggestedTickers([]);
+				try {
+					if (!value.query.results) {
+						return;
+					}
+					let stockQoute = value.query.results.quote;
+					this.setQuote(stockQoute as QuoteSnapshot);
+					console.log('mini quote: ', stockQoute);
+					this.setSuggestedTickers([]);
+				} catch (e) {
+					console.warn(e);
+				}
 			},
 			e => console.log('ajax err', e)
 			);
@@ -73,9 +80,9 @@ class DomainModel {
 		this.quote = quote;
 
 		const test = this.quoteHistory.indexOf(undefined);
-		if(test !== -1){
+		if (test !== -1) {
 			this.quoteHistory[test] = this.quote;
-		}else{
+		} else {
 			this.quoteHistory.push(this.quote);
 		}
 		localStorage.setItem('stockQuoteHistory', JSON.stringify(this.quoteHistory));
@@ -100,7 +107,9 @@ class DomainModel {
 
 	public setQuoteHistory() {
 		let quotes = JSON.parse(localStorage.getItem('stockQuoteHistory'));
-
+		if (!quotes) {
+			return;
+		}
 		for (let i = 0; i < quotes.length; i++) {
 			this.pushQuoteHistory(undefined);
 		}
